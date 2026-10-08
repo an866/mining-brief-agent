@@ -16,7 +16,7 @@ from urllib.parse import quote_plus
 import feedparser
 
 from mining_brief_core.errors import FetchError, ProviderError
-from mining_brief_core.http import fetch_text
+from mining_brief_core.http import fetch_bytes, fetch_text
 
 from ..extract import extract_article
 from ..models import Article, ArticleDetail, utcnow
@@ -118,7 +118,10 @@ class LiveNewsProvider:
         notes: list[str] = []
         for feed_url in feed_urls:
             try:
-                payload = fetch_text(feed_url, timeout=12.0).encode("utf-8", errors="replace")
+                # Hand feedparser the raw bytes: RSS/Atom declare their own
+                # encoding in the XML prolog and feedparser sniffs it, so a
+                # GBK feed survives instead of being mangled by a utf-8 decode.
+                payload = fetch_bytes(feed_url, timeout=12.0)
                 collected.extend(parse_feed(payload, now=now))
             except FetchError as exc:
                 notes.append(f"feed unavailable: {exc}")

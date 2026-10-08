@@ -20,6 +20,7 @@ from mining_brief_core.paths import cache_dir, project_root
 _PDF_MAGIC = b"%PDF"
 CACHE_SUBDIR = "pdf-cache"
 REFRESH_ENV_VAR = "MINING_BRIEF_REFRESH"
+MAX_LOCAL_BYTES = 256 * 1024 * 1024  # 256 MiB cap for caller-supplied local files
 
 
 def _cache_path_for(url: str) -> Path:
@@ -82,6 +83,9 @@ def resolve_pdf_source(uri: str) -> tuple[Path, bool]:
 def _validate_local(path: Path, origin: str) -> tuple[Path, bool]:
     if not path.is_file():
         raise FetchError(f"local PDF not found: {path} (from {origin!r})")
+    size = path.stat().st_size
+    if size > MAX_LOCAL_BYTES:
+        raise FetchError(f"local PDF too large: {path} is {size} bytes (cap {MAX_LOCAL_BYTES})")
     with path.open("rb") as handle:
         header = handle.read(8)
     _validate_pdf_bytes(header, str(path))

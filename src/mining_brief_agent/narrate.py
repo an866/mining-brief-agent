@@ -18,6 +18,7 @@ import json
 import os
 from typing import Any, Protocol
 
+from .composer import BEIJING
 from .models import BriefEvidence, Narration
 
 LLM_MODEL_ENV_VAR = "MINING_BRIEF_LLM_MODEL"
@@ -59,7 +60,7 @@ class TemplateNarrator:
             top = evidence.news[0]
             lines.append(
                 f"{window}内检索到 {len(evidence.news)} 条相关新闻，最新一条为《{top.title}》"
-                f"（{top.source}，{top.published_at:%Y-%m-%d}）"
+                f"（{top.source}，{top.published_at.astimezone(BEIJING):%Y-%m-%d}）"
             )
         else:
             lines.append(f"{window}内未检索到相关新闻")

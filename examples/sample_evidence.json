@@ -16,7 +16,7 @@
       "title": "Pilbara lithium shipments rise as spodumene concentrate prices stabilise",
       "url": "https://demo.example/news/pilbara-shipments-rise",
       "source": "demo-wire",
-      "published_at": "2026-10-08T11:48:07.507961Z",
+      "published_at": "2026-10-08T11:56:49.068847Z",
       "summary": "Concentrate exports from Western Australian operations increased month-on-month, with buyers reporting firmer settlement levels for Q4 cargoes."
     },
     {
@@ -24,7 +24,7 @@
       "title": "Pilgangoora expansion study advances to feasibility stage",
       "url": "https://demo.example/news/pilgangoora-expansion-feasibility",
       "source": "demo-wire",
-      "published_at": "2026-10-07T11:48:07.507961Z",
+      "published_at": "2026-10-07T11:56:49.068847Z",
       "summary": "A pre-feasibility study for a brownfield expansion at the Pilgangoora lithium project has been upgraded, with a definitive feasibility study targeted for completion next year."
     },
     {
@@ -32,7 +32,7 @@
       "title": "Lithium carbonate spot prices hold near two-month highs",
       "url": "https://demo.example/news/lithium-carbonate-spot",
       "source": "demo-wire",
-      "published_at": "2026-10-06T11:48:07.507961Z",
+      "published_at": "2026-10-06T11:56:49.068847Z",
       "summary": "Battery-grade lithium carbonate assessments were little changed week-on-week, holding near their best levels since summer."
     },
     {
@@ -40,7 +40,7 @@
       "title": "Pilbara producers weigh downstream conversion options amid cost pressure",
       "url": "https://demo.example/news/pilbara-downstream-options",
       "source": "demo-wire",
-      "published_at": "2026-10-06T11:48:07.507961Z",
+      "published_at": "2026-10-06T11:56:49.068847Z",
       "summary": "Operators are evaluating domestic and overseas conversion routes as energy costs and permitting timelines shape the calculus."
     },
     {
@@ -48,7 +48,7 @@
       "title": "Australian lithium exports forecast lifted on stronger Asian demand",
       "url": "https://demo.example/news/lithium-export-forecast",
       "source": "demo-policy-wire",
-      "published_at": "2026-10-05T11:48:07.507961Z",
+      "published_at": "2026-10-05T11:56:49.068847Z",
       "summary": "The quarterly resources outlook nudged export volumes higher, citing resilient cathode production schedules in Asia."
     }
   ],
@@ -59,12 +59,12 @@
         "title": "Pilbara lithium shipments rise as spodumene concentrate prices stabilise",
         "url": "https://demo.example/news/pilbara-shipments-rise",
         "source": "demo-wire",
-        "published_at": "2026-10-08T11:48:07.585306Z",
+        "published_at": "2026-10-08T11:56:49.166675Z",
         "summary": "Concentrate exports from Western Australian operations increased month-on-month, with buyers reporting firmer settlement levels for Q4 cargoes."
       },
       "text": "Concentrate shipments from Pilbara lithium operations rose this month as spodumene prices stabilised across the region, according to port data compiled by demo-wire. Volumes recovered after a maintenance window at one of the region's export terminals finished ahead of schedule.\n\nTraders said Q4 settlements for 6% spodumene concentrate have converged in a narrower band than earlier in the year, easing the margin uncertainty that dominated negotiations through the middle of the year. Several producers have kept output guidance unchanged.\n\nAnalysts caution that downstream conversion margins in China remain compressed, and that the pace of demand recovery from cathode makers will decide whether the price floor holds into next quarter. The report is demo content for the mining-brief-agent sample pipeline.",
       "word_count": 119,
-      "fetched_at": "2026-10-08T11:48:07.585306Z",
+      "fetched_at": "2026-10-08T11:56:49.166675Z",
       "via": "snapshot"
     },
     {
@@ -73,12 +73,12 @@
         "title": "Pilgangoora expansion study advances to feasibility stage",
         "url": "https://demo.example/news/pilgangoora-expansion-feasibility",
         "source": "demo-wire",
-        "published_at": "2026-10-07T11:48:07.585756Z",
+        "published_at": "2026-10-07T11:56:49.167419Z",
         "summary": "A pre-feasibility study for a brownfield expansion at the Pilgangoora lithium project has been upgraded, with a definitive feasibility study targeted for completion next year."
       },
       "text": "The expansion concept for the Pilgangoora lithium operation has moved into the definitive feasibility stage, according to a demo project update. The study contemplates additional crushing and dense-media separation capacity alongside a debottlenecking of the existing concentrator.\n\nA decision on the final scope is expected after metallurgical test work completes. The update said grid power and existing camp infrastructure are expected to be the main cost advantages relative to greenfield alternatives in the district.\n\nThis article is synthetic demo content bundled with mining-brief-agent; it does not describe events at any real project.",
       "word_count": 92,
-      "fetched_at": "2026-10-08T11:48:07.585756Z",
+      "fetched_at": "2026-10-08T11:56:49.167419Z",
       "via": "snapshot"
     }
   ],
@@ -143,7 +143,7 @@
     ],
     "warnings": [],
     "method": "table",
-    "generated_at": "2026-10-08T11:48:07.529901Z"
+    "generated_at": "2026-10-08T11:56:49.100932Z"
   },
   "resource_uri": "data/samples/pilbara_li2o_ni43101_sample.pdf",
   "trends": [
@@ -354,7 +354,7 @@
       "notes": [
         "offline synthetic demo series (not real market data); see docs/data-sources.md"
       ],
-      "fetched_at": "2026-10-08T11:48:07.508553Z"
+      "fetched_at": "2026-10-08T11:56:49.070632Z"
     }
   ],
   "risks": [
@@ -364,15 +364,6 @@
       "detail": "近30日 -23.25%（最新 62,735.0 CNY/t），对项目经济性构成压力。",
       "citation_refs": [
         7
-      ],
-      "source": "rule"
-    },
-    {
-      "severity": "info",
-      "title": "Inferred 资源占比",
-      "detail": "Inferred 占已披露资源总量约 40%，建议关注后续升级钻探。",
-      "citation_refs": [
-        6
       ],
       "source": "rule"
     },

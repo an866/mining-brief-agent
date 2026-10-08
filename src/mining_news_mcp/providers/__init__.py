@@ -15,6 +15,8 @@ from __future__ import annotations
 
 import os
 
+from mining_brief_core.errors import ProviderError
+
 from ..models import Article, ArticleDetail
 from .base import NewsProvider, ProviderOutcome
 from .live import LiveNewsProvider
@@ -56,7 +58,13 @@ class AutoNewsProvider:
         try:
             return self._live.search(query, days, limit)
         except Exception as exc:
-            items, outcome = self._snapshot.search(query, days, limit)
+            try:
+                items, outcome = self._snapshot.search(query, days, limit)
+            except Exception as snapshot_exc:
+                raise ProviderError(
+                    f"live news failed ({type(exc).__name__}: {exc}); "
+                    f"offline snapshot also failed ({type(snapshot_exc).__name__}: {snapshot_exc})"
+                ) from exc
             outcome.notes.insert(
                 0,
                 f"live news unavailable ({type(exc).__name__}: {exc}); served from offline snapshot",
@@ -73,7 +81,13 @@ class AutoNewsProvider:
         try:
             return self._live.fetch_article(url)
         except Exception as exc:
-            detail, outcome = self._snapshot.fetch_article(url)
+            try:
+                detail, outcome = self._snapshot.fetch_article(url)
+            except Exception as snapshot_exc:
+                raise ProviderError(
+                    f"fetch_article({url}) failed: live ({type(exc).__name__}: {exc}); "
+                    f"offline snapshot also missed ({type(snapshot_exc).__name__}: {snapshot_exc})"
+                ) from exc
             outcome.notes.insert(
                 0,
                 f"live fetch failed ({type(exc).__name__}: {exc}); served from offline snapshot",

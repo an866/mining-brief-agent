@@ -20,7 +20,7 @@ import json
 import os
 import shutil
 import sys
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 SERVER_MODULES = {
@@ -36,7 +36,13 @@ def default_config_path() -> Path | None:
         if appdata:
             return Path(appdata) / "Claude" / "claude_desktop_config.json"
     elif sys.platform == "darwin":
-        return Path.home() / "Library" / "Application Support" / "Claude" / "claude_desktop_config.json"
+        return (
+            Path.home()
+            / "Library"
+            / "Application Support"
+            / "Claude"
+            / "claude_desktop_config.json"
+        )
     return None
 
 
@@ -60,7 +66,9 @@ def merge_config(existing: dict, entries: dict[str, dict]) -> dict:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--config", type=Path, help="target client config (default: Claude Desktop)")
+    parser.add_argument(
+        "--config", type=Path, help="target client config (default: Claude Desktop)"
+    )
     parser.add_argument("--write", action="store_true", help="actually write (default: dry run)")
     args = parser.parse_args(argv)
 
@@ -91,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
 
     config_path.parent.mkdir(parents=True, exist_ok=True)
     if config_path.is_file():
-        stamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        stamp = datetime.now(UTC).strftime("%Y%m%d%H%M%S")
         backup = config_path.with_suffix(config_path.suffix + f".bak-{stamp}")
         shutil.copy2(config_path, backup)
         print(f"已备份原配置：{backup}")

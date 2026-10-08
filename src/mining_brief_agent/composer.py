@@ -114,7 +114,8 @@ def compose(evidence: BriefEvidence, narration: Narration, generated_at: datetim
         for position, item in enumerate(evidence.news, start=1):
             ref = ref_for_url(evidence.citations, item.url)
             lines.append(
-                f"{position}. **{item.title}** — {item.source} · {item.published_at:%Y-%m-%d} {ref}"
+                f"{position}. **{item.title}** — {item.source} · "
+                f"{item.published_at.astimezone(BEIJING):%Y-%m-%d} {ref}"
             )
             if item.summary:
                 lines.append(f"   - {item.summary[:120]}")

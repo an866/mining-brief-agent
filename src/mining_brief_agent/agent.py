@@ -17,7 +17,7 @@ from lme_price_mcp.models import TrendSeries
 from mineral_pdf_mcp.models import ExtractionResult
 from mining_news_mcp.models import Article, ArticleDetail, SearchResult
 
-from .composer import build_citations, compose, ref_indices_for_kind, severity_rank
+from .composer import BEIJING, build_citations, compose, ref_indices_for_kind, severity_rank
 from .mcp_client import NEWS_SERVER, PDF_SERVER, PRICE_SERVER, ServerHub
 from .models import BriefEvidence, BriefPlanInfo, BriefResult, RiskItem
 from .narrate import get_narrator
@@ -210,7 +210,7 @@ def _derive_risks(evidence: BriefEvidence, risk_keywords: list[str]) -> list[Ris
                     RiskItem(
                         severity="medium",
                         title="Inferred 资源占比较高",
-                        detail=f"Inferred 占已披露资源总量约 {share:.0%}，地质置信度相对较低。",
+                        detail=f"Inferred 占所披露（M&I/Indicated + Inferred）矿石量约 {share:.0%}，地质置信度相对较低。",
                         citation_refs=report_refs,
                     )
                 )
@@ -219,7 +219,7 @@ def _derive_risks(evidence: BriefEvidence, risk_keywords: list[str]) -> list[Ris
                     RiskItem(
                         severity="info",
                         title="Inferred 资源占比",
-                        detail=f"Inferred 占已披露资源总量约 {share:.0%}，建议关注后续升级钻探。",
+                        detail=f"Inferred 占所披露（M&I/Indicated + Inferred）矿石量约 {share:.0%}，建议关注后续升级钻探。",
                         citation_refs=report_refs,
                     )
                 )
@@ -257,7 +257,7 @@ def _derive_risks(evidence: BriefEvidence, risk_keywords: list[str]) -> list[Ris
             RiskItem(
                 severity="high" if keyword.lower() in _HARD_KEYWORDS else "medium",
                 title=f"新闻信号：{item.title[:36]}{'…' if len(item.title) > 36 else ''}",
-                detail=f"命中风险关键词「{keyword}」（{item.source} · {item.published_at:%Y-%m-%d}）。",
+                detail=f"命中风险关键词「{keyword}」（{item.source} · {item.published_at.astimezone(BEIJING):%Y-%m-%d}）。",
                 citation_refs=url_refs,
             )
         )
@@ -276,22 +276,30 @@ def _derive_risks(evidence: BriefEvidence, risk_keywords: list[str]) -> list[Ris
 
 
 def _inferred_share(evidence: BriefEvidence) -> float | None:
-    """Inferred tonnage share for the first commodity that has both groups."""
+    """Inferred's share of disclosed tonnage for the first commodity that has it.
+
+    Deterministic regardless of row order: per commodity, the confident side is
+    "Measured & Indicated" when the report states it (that row already includes
+    Measured + Indicated), otherwise Measured + Indicated are summed as
+    distinct categories. The largest row per category is used so zone-level
+    duplicate rows cannot inflate the total.
+    """
     assert evidence.resources is not None
     by_commodity: dict[str, dict[str, float]] = {}
     for estimate in evidence.resources.estimates:
         if estimate.tonnage_mt is None:
             continue
-        if estimate.category == "Inferred":
-            group = "inferred"
-        elif estimate.category in ("Measured", "Indicated", "Measured & Indicated"):
-            group = "confident"
-        else:
+        if estimate.category not in ("Measured", "Indicated", "Measured & Indicated", "Inferred"):
             continue
-        by_commodity.setdefault(estimate.commodity, {}).setdefault(group, estimate.tonnage_mt)
+        groups = by_commodity.setdefault(estimate.commodity, {})
+        groups[estimate.category] = max(groups.get(estimate.category, 0.0), estimate.tonnage_mt)
     for groups in by_commodity.values():
-        inferred = groups.get("inferred")
-        confident = groups.get("confident")
-        if inferred and confident and (inferred + confident) > 0:
+        inferred = groups.get("Inferred")
+        if not inferred:
+            continue
+        confident = groups.get("Measured & Indicated")
+        if confident is None:
+            confident = groups.get("Measured", 0.0) + groups.get("Indicated", 0.0)
+        if confident > 0:
             return inferred / (inferred + confident)
     return None

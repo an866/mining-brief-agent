@@ -105,3 +105,59 @@ class TestProseStatement:
         result = extract_resources_from_pdf(str(samples["prose_resources"]))
         keys = [(e.category, e.commodity) for e in result.estimates]
         assert len(keys) == len(set(keys))
+
+
+class TestDedupe:
+    def _row(self, tonnage: float, confidence: float, evidence: str) -> ResourceEstimate:
+        return ResourceEstimate(
+            category="Indicated",
+            commodity="Cu",
+            tonnage_mt=tonnage,
+            grade=0.5,
+            grade_unit="%",
+            contained_metal=5.0,
+            contained_unit="kt",
+            page=2,
+            evidence=evidence,
+            confidence=confidence,
+        )
+
+    def test_collapses_identical_rows_keeping_higher_confidence(self) -> None:
+        from mineral_pdf_mcp.extract import _dedupe
+
+        table_row = self._row(10.0, 1.0, "Indicated | 10")
+        text_row = self._row(10.0, 0.7, "Indicated 10 Mt at 0.5% Cu")
+        rows, warnings = _dedupe([table_row, text_row])
+        assert len(rows) == 1
+        assert rows[0].confidence == 1.0
+        assert warnings == []
+
+    def test_keeps_conflicting_rows_and_warns(self) -> None:
+        """Two zones on one page are information, not duplicates."""
+        from mineral_pdf_mcp.extract import _dedupe
+
+        zone_a = self._row(10.0, 1.0, "Indicated | 10")
+        zone_b = self._row(99.0, 1.0, "Indicated | 99")
+        rows, warnings = _dedupe([zone_a, zone_b])
+        assert len(rows) == 2
+        assert warnings and "different values" in warnings[0]
+
+
+class TestTextRegexCompactedForms:
+    def test_compacted_statements_parse(self) -> None:
+        from mineral_pdf_mcp.extract import _parse_text_lines
+
+        text = (
+            "Indicated Resources of 52.4Mt at 1.02% Cu for 534kt Cu\n"
+            "Inferred 21.7 million tonnes at 0.88 g/t Au for 614 koz Au\n"
+            "Measured & Indicated 70.6 Mt at 1.17% Li2O"
+        )
+        rows = _parse_text_lines(text, 3)
+        assert [row.category for row in rows] == ["Indicated", "Inferred", "Measured & Indicated"]
+        assert rows[0].tonnage_mt == pytest.approx(52.4)
+        assert rows[0].grade == pytest.approx(1.02)
+        assert rows[0].contained_unit == "kt"
+        assert rows[1].tonnage_mt == pytest.approx(21.7)
+        assert rows[1].commodity == "Au"
+        assert rows[1].contained_unit == "koz"
+        assert rows[2].grade == pytest.approx(1.17)

@@ -63,6 +63,21 @@ def fetch_bytes(
         raise FetchError(f"GET {url} failed: {exc}") from exc
 
 
+def decode_text(body: bytes) -> str:
+    """Decode a response body, honoring common Chinese encodings.
+
+    Strict UTF-8 first, then GB18030 (a superset of GBK/GB2312, still common
+    for domestic sources), and only then UTF-8 with replacement characters as
+    an explicitly lossy last resort.
+    """
+    for encoding in ("utf-8", "gb18030"):
+        try:
+            return body.decode(encoding)
+        except UnicodeDecodeError:
+            continue
+    return body.decode("utf-8", errors="replace")
+
+
 def fetch_text(
     url: str,
     *,
@@ -70,6 +85,6 @@ def fetch_text(
     max_bytes: int = DEFAULT_MAX_BYTES,
     headers: dict[str, str] | None = None,
 ) -> str:
-    """GET ``url`` and decode the body as text (httpx charset detection)."""
+    """GET ``url`` and decode the body (UTF-8, falling back to GB18030)."""
     body = fetch_bytes(url, timeout=timeout, max_bytes=max_bytes, headers=headers)
-    return body.decode("utf-8", errors="replace")
+    return decode_text(body)

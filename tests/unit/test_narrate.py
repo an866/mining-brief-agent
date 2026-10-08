@@ -99,6 +99,21 @@ def test_parse_narration_empty_risks_returns_none() -> None:
     assert risks is None
 
 
-def test_get_narrator_modes() -> None:
+def test_get_narrator_auto_uses_template_without_sdk(monkeypatch) -> None:
+    import mining_brief_agent.narrate as narrate_module
+
+    monkeypatch.setattr(narrate_module, "_module_available", lambda name: False)
+    assert type(narrate_module.get_narrator("auto")).__name__ == "TemplateNarrator"
+
+
+def test_get_narrator_auto_uses_anthropic_with_sdk_and_credentials(monkeypatch) -> None:
+    import mining_brief_agent.narrate as narrate_module
+
+    monkeypatch.setattr(narrate_module, "_module_available", lambda name: True)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
+    assert type(narrate_module.get_narrator("auto")).__name__ == "AnthropicNarrator"
+
+
+def test_get_narrator_explicit_modes() -> None:
     assert type(get_narrator("template")).__name__ == "TemplateNarrator"
-    assert type(get_narrator("auto")).__name__ in {"TemplateNarrator", "AnthropicNarrator"}
+    assert type(get_narrator("anthropic")).__name__ == "AnthropicNarrator"

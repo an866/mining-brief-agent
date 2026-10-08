@@ -14,7 +14,8 @@ Two complementary strategies, merged with table results preferred:
    instead of a table.
 
 Rows that mention a category but expose no tonnage are reported as warnings
-rather than silently dropped.
+rather than silently dropped, and same-key rows whose numbers disagree are
+kept side by side (with a warning) instead of being collapsed.
 """
 
 from __future__ import annotations
@@ -65,7 +66,7 @@ _COMMODITY_SYMBOLS = (
 _COMMODITY_RE = re.compile(r"\b(" + "|".join(_COMMODITY_SYMBOLS) + r")\b")
 
 _GRADE_UNIT_RE = re.compile(r"(g/t|gpt|ppm|%)", re.I)
-_CONTAINED_UNIT_RE = re.compile(r"\b(Moz|koz|Mlb|kt|Mt|mlb|oz|lb|t)\b")
+_CONTAINED_UNIT_RE = re.compile(r"\b(Moz|koz|Mlb|kt|Mt|mlb|oz|lb|t)\b", re.I)
 _TONNAGE_UNIT_RE = re.compile(r"\b(Mt|kt|million\s+tonnes?|million\s+tons?|tonnes?|tons?)\b", re.I)
 
 _HEADER_TONNAGE_RE = re.compile(r"tonn|million\s+tonnes|quantity|\bore\b|\bmt\b|\bkt\b", re.I)
@@ -136,12 +137,23 @@ def _grade_unit_in(header: str) -> str | None:
     return "g/t" if unit.lower() == "gpt" else unit
 
 
+_CONTAINED_UNIT_CANONICAL = {
+    "moz": "Moz",
+    "koz": "koz",
+    "mlb": "Mlb",
+    "kt": "kt",
+    "mt": "Mt",
+    "oz": "oz",
+    "lb": "lb",
+    "t": "t",
+}
+
+
 def _contained_unit_in(header: str) -> str | None:
     match = _CONTAINED_UNIT_RE.search(header)
     if not match:
         return None
-    unit = match.group(1)
-    return {"mlb": "Mlb"}.get(unit.lower(), unit)
+    return _CONTAINED_UNIT_CANONICAL.get(match.group(1).lower(), match.group(1))
 
 
 # ---------------------------------------------------------------------------
@@ -370,22 +382,53 @@ def _extract_metadata(
 # ---------------------------------------------------------------------------
 
 
-def _dedupe(estimates: list[ResourceEstimate]) -> list[ResourceEstimate]:
-    """Keep the highest-confidence row per (category, commodity, page)."""
-    best: dict[tuple[str, str, int], ResourceEstimate] = {}
+def _dedupe(estimates: list[ResourceEstimate]) -> tuple[list[ResourceEstimate], list[str]]:
+    """Collapse rows describing the same (category, commodity, page).
+
+    Rows collapse only when their numbers agree (keeping the higher-confidence
+    one). Rows that differ are kept side by side and reported as warnings —
+    two zones or two cut-off cases on one page are information, not duplicates.
+    """
+    index_by_key: dict[tuple[str, str, int], int] = {}
+    kept: list[ResourceEstimate] = []
+    warnings: list[str] = []
     for estimate in estimates:
         key = (estimate.category.lower(), estimate.commodity.lower(), estimate.page)
-        current = best.get(key)
-        if current is None or estimate.confidence > current.confidence:
-            best[key] = estimate
-    return list(best.values())
+        index = index_by_key.get(key)
+        if index is None:
+            index_by_key[key] = len(kept)
+            kept.append(estimate)
+            continue
+        current = kept[index]
+        same_values = (
+            current.tonnage_mt == estimate.tonnage_mt
+            and current.grade == estimate.grade
+            and current.contained_metal == estimate.contained_metal
+        )
+        if same_values:
+            if estimate.confidence > current.confidence:
+                kept[index] = estimate
+            continue
+        kept.append(estimate)
+        warnings.append(
+            f"page {estimate.page}: multiple {estimate.category}/{estimate.commodity} rows with "
+            "different values kept (possible separate zones or cut-off cases): "
+            f"{current.evidence!r} vs {estimate.evidence!r}"
+        )
+    return kept, warnings
+
+
+def _sha256_of_file(path: str) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def extract_resources_from_pdf(pdf_path: str, source_uri: str | None = None) -> ExtractionResult:
     """Extract resource estimates from a local PDF file."""
-    with open(pdf_path, "rb") as handle:
-        payload = handle.read()
-    sha256 = hashlib.sha256(payload).hexdigest()
+    sha256 = _sha256_of_file(pdf_path)
 
     estimates: list[ResourceEstimate] = []
     warnings: list[str] = []
@@ -425,7 +468,8 @@ def extract_resources_from_pdf(pdf_path: str, source_uri: str | None = None) -> 
 
         page_count = len(pdf.pages)
 
-    merged = _dedupe(estimates)
+    merged, dedupe_warnings = _dedupe(estimates)
+    warnings.extend(dedupe_warnings)
     # Stable, human-friendly ordering: by page, then category, then commodity.
     merged.sort(key=lambda e: (e.page, e.category, e.commodity))
 
