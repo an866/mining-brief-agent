@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Env / secrets
+.env
+
+# Runtime artifacts
+data/cache/
+out/
+*.log
+
+# Local docker validation copy (see its header comment)
+Dockerfile.local
+
+# IDE
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
