@@ -1,0 +1,14 @@
+# 5 分钟跑通（详见 RUN.md）：
+#   docker compose run --rm agent
+# 自定义查询：
+#   docker compose run --rm agent "给我生成一份关于 安第斯铜金矿 的今日简报"
+services:
+  agent:
+    build: .
+    image: mining-brief-agent:latest
+    environment:
+      # auto = 先实时抓取、失败自动回落仓库内置快照；可改为 live / snapshot
+      MINING_NEWS_SOURCE: ${MINING_NEWS_SOURCE:-auto}
+      MINING_PRICE_SOURCE: ${MINING_PRICE_SOURCE:-auto}
+      # 可选：设置后由 Claude 撰写摘要与风险观察（未设置则用确定性模板叙述器）
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}

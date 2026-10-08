@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "mining-news": {
+      "command": "mining-news-mcp",
+      "env": {
+        "MINING_NEWS_SOURCE": "auto"
+      }
+    },
+    "mineral-pdf": {
+      "command": "mineral-pdf-mcp"
+    },
+    "lme-price": {
+      "command": "lme-price-mcp",
+      "env": {
+        "MINING_PRICE_SOURCE": "auto"
+      }
+    }
+  }
+}
