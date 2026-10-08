@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import hashlib
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pdfplumber
 from pdfplumber.page import Page
@@ -43,8 +43,24 @@ _CATEGORY_PATTERNS: list[tuple[re.Pattern[str], str]] = [
 ]
 
 _COMMODITY_SYMBOLS = (
-    "TREO", "Li2O", "Ta2O5", "U3O8", "Graphite",
-    "Cu", "Au", "Ag", "Zn", "Ni", "Fe", "Li", "Ta", "Mo", "Pb", "Sn", "Co", "Mn",
+    "TREO",
+    "Li2O",
+    "Ta2O5",
+    "U3O8",
+    "Graphite",
+    "Cu",
+    "Au",
+    "Ag",
+    "Zn",
+    "Ni",
+    "Fe",
+    "Li",
+    "Ta",
+    "Mo",
+    "Pb",
+    "Sn",
+    "Co",
+    "Mn",
 )
 _COMMODITY_RE = re.compile(r"\b(" + "|".join(_COMMODITY_SYMBOLS) + r")\b")
 
@@ -199,7 +215,9 @@ def _find_header_row(rows: list[list[str]]) -> int | None:
     return None
 
 
-def _parse_table(table: list[list[str | None]], page_number: int) -> tuple[list[ResourceEstimate], list[str]]:
+def _parse_table(
+    table: list[list[str | None]], page_number: int
+) -> tuple[list[ResourceEstimate], list[str]]:
     rows = [[(cell or "").strip() for cell in row] for row in table]
     rows = [row for row in rows if any(row)]
     if len(rows) < 2:
@@ -291,7 +309,13 @@ def _parse_text_lines(text: str, page_number: int) -> list[ResourceEstimate]:
             continue
         commodity = (match.group("commodity") or "").upper() or "unknown"
         commodity = {
-            "LI2O": "Li2O", "CU": "Cu", "AU": "Au", "AG": "Ag", "ZN": "Zn", "NI": "Ni", "FE": "Fe",
+            "LI2O": "Li2O",
+            "CU": "Cu",
+            "AU": "Au",
+            "AG": "Ag",
+            "ZN": "Zn",
+            "NI": "Ni",
+            "FE": "Fe",
         }.get(commodity, commodity)
         grade_unit = match.group("gunit")
         if grade_unit.lower() == "gpt":
@@ -320,10 +344,14 @@ def _parse_text_lines(text: str, page_number: int) -> list[ResourceEstimate]:
 _COMPANY_LINE_RE = re.compile(r"^\s*(?:company|issuer)\s*[:\-]\s*(.+?)\s*$", re.I | re.M)
 _PROJECT_LINE_RE = re.compile(r"^\s*(?:project|property)\s*[:\-]\s*(.+?)\s*$", re.I | re.M)
 _TITLE_LINE_RE = re.compile(r"^.*NI\s*43-101.*$", re.I | re.M)
-_EFFECTIVE_DATE_RE = re.compile(r"effective\s+date\s*[:\-]?\s*([A-Z][a-z]+\s+\d{1,2},\s*\d{4})", re.I)
+_EFFECTIVE_DATE_RE = re.compile(
+    r"effective\s+date\s*[:\-]?\s*([A-Z][a-z]+\s+\d{1,2},\s*\d{4})", re.I
+)
 
 
-def _extract_metadata(first_pages_text: str) -> tuple[str | None, str | None, str | None, str | None]:
+def _extract_metadata(
+    first_pages_text: str,
+) -> tuple[str | None, str | None, str | None, str | None]:
     title_match = _TITLE_LINE_RE.search(first_pages_text)
     report_title = title_match.group(0).strip() if title_match else None
     company_match = _COMPANY_LINE_RE.search(first_pages_text)
@@ -370,7 +398,7 @@ def extract_resources_from_pdf(pdf_path: str, source_uri: str | None = None) -> 
             page_text = ""
             try:
                 page_text = _page_text(page)
-            except Exception as exc:  # noqa: BLE001 - one bad page must not sink the doc
+            except Exception as exc:
                 warnings.append(f"page {page_index}: text extraction failed ({exc})")
 
             if page_index <= 3 and page_text:
@@ -378,7 +406,7 @@ def extract_resources_from_pdf(pdf_path: str, source_uri: str | None = None) -> 
 
             try:
                 tables = page.extract_tables()
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 tables = []
                 warnings.append(f"page {page_index}: table extraction failed ({exc})")
 
@@ -423,7 +451,7 @@ def extract_resources_from_pdf(pdf_path: str, source_uri: str | None = None) -> 
         estimates=merged,
         warnings=warnings,
         method=method,
-        generated_at=datetime.now(timezone.utc),
+        generated_at=datetime.now(UTC),
     )
 
 

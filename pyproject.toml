@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-llm = ["anthropic>=0.40"]
+llm = ["anthropic>=1,<2"]
 dev = [
   "pytest>=8.0",
   "pytest-asyncio>=0.24",
@@ -76,7 +76,13 @@ select = [
   "DTZ",      # datetime timezone hygiene
   "RUF",
 ]
-ignore = ["E501"]
+ignore = [
+  "E501",   # line length is enforced by the formatter, not the linter
+  "RUF001", # ambiguous unicode: full-width Chinese punctuation is intentional
+  "RUF002", # same, in docstrings
+  "RUF003", # same, in comments
+  "DTZ011", # date.today(): local-date semantics are intentional for demo-data rebasing
+]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["DTZ"]
@@ -86,3 +92,7 @@ python_version = "3.11"
 strict = true
 warn_unused_ignores = true
 files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["anthropic.*", "feedparser.*"]
+ignore_missing_imports = true

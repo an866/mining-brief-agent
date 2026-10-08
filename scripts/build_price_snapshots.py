@@ -34,11 +34,21 @@ class SeriesParams:
 
 # Keys must cover every commodity in the registry.
 PARAMS: dict[str, SeriesParams] = {
-    "copper": SeriesParams(base=9_500.0, drift_pct_over_window=2.0, daily_volatility=0.010, seed=101, decimals=1),
-    "zinc": SeriesParams(base=2_700.0, drift_pct_over_window=-3.0, daily_volatility=0.013, seed=102, decimals=1),
-    "nickel": SeriesParams(base=15_500.0, drift_pct_over_window=-6.0, daily_volatility=0.016, seed=103, decimals=1),
-    "lithium_carbonate": SeriesParams(base=76_000.0, drift_pct_over_window=-8.0, daily_volatility=0.018, seed=104, decimals=0),
-    "iron_ore": SeriesParams(base=780.0, drift_pct_over_window=1.0, daily_volatility=0.012, seed=105, decimals=1),
+    "copper": SeriesParams(
+        base=9_500.0, drift_pct_over_window=2.0, daily_volatility=0.010, seed=101, decimals=1
+    ),
+    "zinc": SeriesParams(
+        base=2_700.0, drift_pct_over_window=-3.0, daily_volatility=0.013, seed=102, decimals=1
+    ),
+    "nickel": SeriesParams(
+        base=15_500.0, drift_pct_over_window=-6.0, daily_volatility=0.016, seed=103, decimals=1
+    ),
+    "lithium_carbonate": SeriesParams(
+        base=76_000.0, drift_pct_over_window=-8.0, daily_volatility=0.018, seed=104, decimals=0
+    ),
+    "iron_ore": SeriesParams(
+        base=780.0, drift_pct_over_window=1.0, daily_volatility=0.012, seed=105, decimals=1
+    ),
 }
 
 
@@ -69,8 +79,7 @@ def build_snapshot(spec_key: str, params: SeriesParams, days: int = DAYS) -> dic
         ),
         "generator": "scripts/build_price_snapshots.py",
         "points": [
-            {"days_ago": days - 1 - index, "price": price}
-            for index, price in enumerate(prices)
+            {"days_ago": days - 1 - index, "price": price} for index, price in enumerate(prices)
         ],
     }
 
@@ -85,9 +94,8 @@ def main() -> None:
         spec = COMMODITIES[key]
         payload = build_snapshot(key, params)
         target: Path = dest / spec.snapshot_file
-        target.write_text(
-            json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-        )
+        with target.open("w", encoding="utf-8", newline="\n") as handle:
+            handle.write(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
         print(f"{key}: {len(payload['points'])} points -> {target}")
 
 

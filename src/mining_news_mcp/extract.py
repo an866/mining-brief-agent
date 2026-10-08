@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
@@ -43,7 +43,9 @@ _MIN_PARAGRAPH_CHARS = 30
 _MAX_TEXT_CHARS = 20_000
 
 _META_DATE_PROPERTIES = ("article:published_time", "og:published_time", "datePublished")
-_DATE_TEXT_PATTERN = re.compile(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:?\d{2})?")
+_DATE_TEXT_PATTERN = re.compile(
+    r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:?\d{2})?"
+)
 
 
 class ExtractedArticle(BaseModel):
@@ -65,11 +67,13 @@ def _parse_datetime(raw: str) -> datetime | None:
     except ValueError:
         return None
     if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
-    return parsed.astimezone(timezone.utc)
+        parsed = parsed.replace(tzinfo=UTC)
+    return parsed.astimezone(UTC)
 
 
-def _meta_content(soup: BeautifulSoup, *, prop: str | None = None, name: str | None = None) -> str | None:
+def _meta_content(
+    soup: BeautifulSoup, *, prop: str | None = None, name: str | None = None
+) -> str | None:
     attrs: dict[str, str] = {}
     if prop:
         attrs["property"] = prop
@@ -91,7 +95,9 @@ def _extract_published(soup: BeautifulSoup) -> datetime | None:
 
     time_tag = soup.find("time")
     if isinstance(time_tag, Tag):
-        parsed = _parse_datetime(str(time_tag.get("datetime") or time_tag.get_text(" ", strip=True)))
+        parsed = _parse_datetime(
+            str(time_tag.get("datetime") or time_tag.get_text(" ", strip=True))
+        )
         if parsed:
             return parsed
 

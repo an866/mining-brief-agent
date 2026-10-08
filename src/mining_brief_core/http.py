@@ -42,23 +42,23 @@ def fetch_bytes(
 ) -> bytes:
     """GET ``url`` and return the body, capped at ``max_bytes``."""
     try:
-        with build_client(timeout=timeout, headers=headers) as client:
-            with client.stream("GET", url) as response:
-                response.raise_for_status()
-                chunks: list[bytes] = []
-                total = 0
-                for chunk in response.iter_bytes():
-                    total += len(chunk)
-                    if total > max_bytes:
-                        raise FetchError(
-                            f"GET {url} exceeded the {max_bytes} byte cap; refusing to buffer further"
-                        )
-                    chunks.append(chunk)
-                return b"".join(chunks)
+        with (
+            build_client(timeout=timeout, headers=headers) as client,
+            client.stream("GET", url) as response,
+        ):
+            response.raise_for_status()
+            chunks: list[bytes] = []
+            total = 0
+            for chunk in response.iter_bytes():
+                total += len(chunk)
+                if total > max_bytes:
+                    raise FetchError(
+                        f"GET {url} exceeded the {max_bytes} byte cap; refusing to buffer further"
+                    )
+                chunks.append(chunk)
+            return b"".join(chunks)
     except httpx.HTTPStatusError as exc:
-        raise FetchError(
-            f"GET {url} returned HTTP {exc.response.status_code}"
-        ) from exc
+        raise FetchError(f"GET {url} returned HTTP {exc.response.status_code}") from exc
     except httpx.HTTPError as exc:
         raise FetchError(f"GET {url} failed: {exc}") from exc
 

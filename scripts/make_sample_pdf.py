@@ -25,8 +25,8 @@ from reportlab.lib.pagesizes import A4  # noqa: E402
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet  # noqa: E402
 from reportlab.lib.units import mm  # noqa: E402
 from reportlab.platypus import (  # noqa: E402
-    Paragraph,
     PageBreak,
+    Paragraph,
     SimpleDocTemplate,
     Spacer,
     Table,
@@ -51,12 +51,14 @@ def _styles() -> dict[str, ParagraphStyle]:
         ),
         "h2": ParagraphStyle("h2", parent=base["Heading2"], spaceBefore=10, spaceAfter=6),
         "body": ParagraphStyle("body", parent=base["BodyText"], fontSize=10, leading=14),
-        "note": ParagraphStyle("note", parent=base["BodyText"], fontSize=8, leading=11, textColor=colors.grey),
+        "note": ParagraphStyle(
+            "note", parent=base["BodyText"], fontSize=8, leading=11, textColor=colors.grey
+        ),
         "cell": ParagraphStyle("cell", parent=base["BodyText"], fontSize=9, leading=11),
     }
 
 
-def _footer(canvas, doc) -> None:  # noqa: ANN001 - reportlab callback signature
+def _footer(canvas, doc) -> None:
     canvas.saveState()
     canvas.setFont("Helvetica", 7)
     canvas.setFillColor(colors.grey)
@@ -65,7 +67,7 @@ def _footer(canvas, doc) -> None:  # noqa: ANN001 - reportlab callback signature
     canvas.restoreState()
 
 
-def _build(dest: Path, filename: str, flowables: list) -> Path:  # noqa: ANN001
+def _build(dest: Path, filename: str, flowables: list) -> Path:
     dest.mkdir(parents=True, exist_ok=True)
     target = dest / filename
     doc = SimpleDocTemplate(
@@ -82,7 +84,9 @@ def _build(dest: Path, filename: str, flowables: list) -> Path:  # noqa: ANN001
     return target
 
 
-def _resource_table(header: list[str], rows: list[list[str]], styles: dict[str, ParagraphStyle]) -> Table:
+def _resource_table(
+    header: list[str], rows: list[list[str]], styles: dict[str, ParagraphStyle]
+) -> Table:
     data = [[Paragraph(cell, styles["cell"]) for cell in header]]
     data += [[Paragraph(cell, styles["cell"]) for cell in row] for row in rows]
     table = Table(data, hAlign="LEFT")
@@ -104,7 +108,8 @@ def build_pilbara_lithium(dest: Path) -> Path:
     styles = _styles()
     flow: list = [
         Paragraph(
-            "NI 43-101 Technical Report on the Pilbara Lithium Project (Demo Sample)", styles["title"]
+            "NI 43-101 Technical Report on the Pilbara Lithium Project (Demo Sample)",
+            styles["title"],
         ),
         Spacer(1, 4 * mm),
         Paragraph("Project: Pilbara Lithium Project (Demo)", styles["body"]),

@@ -23,6 +23,8 @@ class PriceProvider(Protocol):
         """Return the price for ``on`` (a date) or the latest available."""
         ...
 
-    def get_series(self, spec: CommoditySpec, days: int) -> tuple[list[PricePoint], ProviderOutcome]:
+    def get_series(
+        self, spec: CommoditySpec, days: int
+    ) -> tuple[list[PricePoint], ProviderOutcome]:
         """Return a daily series covering the last ``days`` days."""
         ...

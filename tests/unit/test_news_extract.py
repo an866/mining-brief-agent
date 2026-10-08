@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from mining_news_mcp.extract import extract_article
@@ -16,7 +16,7 @@ def test_extracts_title_text_and_publication_time() -> None:
 
     assert article.title == "Pilbara lithium shipments rise as prices stabilise"
     assert "Western Australian lithium producers" in article.text
-    assert article.published_at == datetime(2025, 10, 1, 8, 30, tzinfo=timezone.utc)
+    assert article.published_at == datetime(2025, 10, 1, 8, 30, tzinfo=UTC)
 
 
 def test_strips_boilerplate_and_scripts() -> None:
@@ -53,4 +53,4 @@ def test_reads_ld_json_publication_date() -> None:
         + "</p></article></body></html>"
     )
     article = extract_article(html, "https://demo.example/ld")
-    assert article.published_at == datetime(2025, 9, 14, 17, 2, 3, tzinfo=timezone.utc)
+    assert article.published_at == datetime(2025, 9, 14, 17, 2, 3, tzinfo=UTC)

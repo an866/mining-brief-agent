@@ -1,0 +1,440 @@
+{
+  "query": "给我生成一份关于 Pilbara 锂矿的今日简报",
+  "days": 7,
+  "plan": {
+    "project_key": "pilbara-lithium",
+    "project_name": "Pilbara 锂矿（演示）",
+    "project_name_en": "Pilbara Lithium Project (Demo)",
+    "matched_alias": "pilbara",
+    "commodities": [
+      "lithium_carbonate"
+    ]
+  },
+  "news": [
+    {
+      "id": "n-0001",
+      "title": "Pilbara lithium shipments rise as spodumene concentrate prices stabilise",
+      "url": "https://demo.example/news/pilbara-shipments-rise",
+      "source": "demo-wire",
+      "published_at": "2026-10-08T11:42:02.105162Z",
+      "summary": "Concentrate exports from Western Australian operations increased month-on-month, with buyers reporting firmer settlement levels for Q4 cargoes."
+    },
+    {
+      "id": "n-0002",
+      "title": "Pilgangoora expansion study advances to feasibility stage",
+      "url": "https://demo.example/news/pilgangoora-expansion-feasibility",
+      "source": "demo-wire",
+      "published_at": "2026-10-07T11:42:02.105162Z",
+      "summary": "A pre-feasibility study for a brownfield expansion at the Pilgangoora lithium project has been upgraded, with a definitive feasibility study targeted for completion next year."
+    },
+    {
+      "id": "n-0004",
+      "title": "Lithium carbonate spot prices hold near two-month highs",
+      "url": "https://demo.example/news/lithium-carbonate-spot",
+      "source": "demo-wire",
+      "published_at": "2026-10-06T11:42:02.105162Z",
+      "summary": "Battery-grade lithium carbonate assessments were little changed week-on-week, holding near their best levels since summer."
+    },
+    {
+      "id": "n-0005",
+      "title": "Pilbara producers weigh downstream conversion options amid cost pressure",
+      "url": "https://demo.example/news/pilbara-downstream-options",
+      "source": "demo-wire",
+      "published_at": "2026-10-06T11:42:02.105162Z",
+      "summary": "Operators are evaluating domestic and overseas conversion routes as energy costs and permitting timelines shape the calculus."
+    },
+    {
+      "id": "n-0006",
+      "title": "Australian lithium exports forecast lifted on stronger Asian demand",
+      "url": "https://demo.example/news/lithium-export-forecast",
+      "source": "demo-policy-wire",
+      "published_at": "2026-10-05T11:42:02.105162Z",
+      "summary": "The quarterly resources outlook nudged export volumes higher, citing resilient cathode production schedules in Asia."
+    }
+  ],
+  "articles": [
+    {
+      "article": {
+        "id": "n-0001",
+        "title": "Pilbara lithium shipments rise as spodumene concentrate prices stabilise",
+        "url": "https://demo.example/news/pilbara-shipments-rise",
+        "source": "demo-wire",
+        "published_at": "2026-10-08T11:42:02.273817Z",
+        "summary": "Concentrate exports from Western Australian operations increased month-on-month, with buyers reporting firmer settlement levels for Q4 cargoes."
+      },
+      "text": "Concentrate shipments from Pilbara lithium operations rose this month as spodumene prices stabilised across the region, according to port data compiled by demo-wire. Volumes recovered after a maintenance window at one of the region's export terminals finished ahead of schedule.\n\nTraders said Q4 settlements for 6% spodumene concentrate have converged in a narrower band than earlier in the year, easing the margin uncertainty that dominated negotiations through the middle of the year. Several producers have kept output guidance unchanged.\n\nAnalysts caution that downstream conversion margins in China remain compressed, and that the pace of demand recovery from cathode makers will decide whether the price floor holds into next quarter. The report is demo content for the mining-brief-agent sample pipeline.",
+      "word_count": 119,
+      "fetched_at": "2026-10-08T11:42:02.273817Z",
+      "via": "snapshot"
+    },
+    {
+      "article": {
+        "id": "n-0002",
+        "title": "Pilgangoora expansion study advances to feasibility stage",
+        "url": "https://demo.example/news/pilgangoora-expansion-feasibility",
+        "source": "demo-wire",
+        "published_at": "2026-10-07T11:42:02.274373Z",
+        "summary": "A pre-feasibility study for a brownfield expansion at the Pilgangoora lithium project has been upgraded, with a definitive feasibility study targeted for completion next year."
+      },
+      "text": "The expansion concept for the Pilgangoora lithium operation has moved into the definitive feasibility stage, according to a demo project update. The study contemplates additional crushing and dense-media separation capacity alongside a debottlenecking of the existing concentrator.\n\nA decision on the final scope is expected after metallurgical test work completes. The update said grid power and existing camp infrastructure are expected to be the main cost advantages relative to greenfield alternatives in the district.\n\nThis article is synthetic demo content bundled with mining-brief-agent; it does not describe events at any real project.",
+      "word_count": 92,
+      "fetched_at": "2026-10-08T11:42:02.274373Z",
+      "via": "snapshot"
+    }
+  ],
+  "resources": {
+    "source": "data/samples/pilbara_li2o_ni43101_sample.pdf",
+    "resolved_path": "D:\\ClaudeAI\\test\\mining-brief-agent\\data\\samples\\pilbara_li2o_ni43101_sample.pdf",
+    "sha256": "3a70385dfadbaa0596ec35d349279d30ea1cf6b80b7160bce13e4f2644f1f26d",
+    "page_count": 2,
+    "report_title": "NI 43-101 Technical Report on the Pilbara Lithium Project",
+    "project_name": "Pilbara Lithium Project (Demo)",
+    "company": "Demo Lithium Pty Ltd",
+    "effective_date": "March 31, 2025",
+    "estimates": [
+      {
+        "category": "Indicated",
+        "commodity": "Li2O",
+        "tonnage_mt": 52.4,
+        "grade": 1.12,
+        "grade_unit": "%",
+        "contained_metal": 587.0,
+        "contained_unit": "kt",
+        "page": 2,
+        "evidence": "Indicated | 52.4 | 1.12 | 587",
+        "confidence": 1.0
+      },
+      {
+        "category": "Inferred",
+        "commodity": "Li2O",
+        "tonnage_mt": 34.8,
+        "grade": 0.94,
+        "grade_unit": "%",
+        "contained_metal": 327.0,
+        "contained_unit": "kt",
+        "page": 2,
+        "evidence": "Inferred | 34.8 | 0.94 | 327",
+        "confidence": 1.0
+      },
+      {
+        "category": "Measured",
+        "commodity": "Li2O",
+        "tonnage_mt": 18.2,
+        "grade": 1.31,
+        "grade_unit": "%",
+        "contained_metal": 238.0,
+        "contained_unit": "kt",
+        "page": 2,
+        "evidence": "Measured | 18.2 | 1.31 | 238",
+        "confidence": 1.0
+      },
+      {
+        "category": "Measured & Indicated",
+        "commodity": "Li2O",
+        "tonnage_mt": 70.6,
+        "grade": 1.17,
+        "grade_unit": "%",
+        "contained_metal": 825.0,
+        "contained_unit": "kt",
+        "page": 2,
+        "evidence": "Measured & Indicated | 70.6 | 1.17 | 825",
+        "confidence": 1.0
+      }
+    ],
+    "warnings": [],
+    "method": "table",
+    "generated_at": "2026-10-08T11:42:02.125339Z"
+  },
+  "resource_uri": "data/samples/pilbara_li2o_ni43101_sample.pdf",
+  "trends": [
+    {
+      "commodity": "lithium_carbonate",
+      "label": "Lithium carbonate (GFEX main contract)",
+      "days": 30,
+      "unit": "CNY/t",
+      "points": [
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-08",
+          "price": 81744.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-09",
+          "price": 79931.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-10",
+          "price": 79338.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-11",
+          "price": 79033.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-12",
+          "price": 77759.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-13",
+          "price": 78874.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-14",
+          "price": 76979.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-15",
+          "price": 78743.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-16",
+          "price": 76354.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-17",
+          "price": 77174.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-18",
+          "price": 75684.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-19",
+          "price": 73423.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-20",
+          "price": 73057.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-21",
+          "price": 72717.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-22",
+          "price": 72503.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-23",
+          "price": 73193.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-24",
+          "price": 72690.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-25",
+          "price": 71196.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-26",
+          "price": 71271.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-27",
+          "price": 72612.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-28",
+          "price": 73497.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-29",
+          "price": 71389.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-09-30",
+          "price": 70060.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-10-01",
+          "price": 69176.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-10-02",
+          "price": 68424.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-10-03",
+          "price": 65504.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-10-04",
+          "price": 64263.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-10-05",
+          "price": 62749.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-10-06",
+          "price": 61046.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-10-07",
+          "price": 62668.0,
+          "unit": "CNY/t"
+        },
+        {
+          "commodity": "lithium_carbonate",
+          "date": "2026-10-08",
+          "price": 62735.0,
+          "unit": "CNY/t"
+        }
+      ],
+      "latest": {
+        "commodity": "lithium_carbonate",
+        "date": "2026-10-08",
+        "price": 62735.0,
+        "unit": "CNY/t"
+      },
+      "change_abs": -19009.0,
+      "change_pct": -23.25,
+      "direction": "down",
+      "sparkline": "█▇▇▇▆▇▆▆▆▆▅▅▅▄▄▅▄▄▄▄▅▄▄▃▃▂▂▁▁▁▁",
+      "provider": "snapshot",
+      "notes": [
+        "offline synthetic demo series (not real market data); see docs/data-sources.md"
+      ],
+      "fetched_at": "2026-10-08T11:42:02.113204Z"
+    }
+  ],
+  "risks": [
+    {
+      "severity": "high",
+      "title": "Lithium carbonate (GFEX main contract)价格显著下行",
+      "detail": "近30日 -23.25%（最新 62,735.0 CNY/t），对项目经济性构成压力。",
+      "citation_refs": [
+        7
+      ],
+      "source": "rule"
+    },
+    {
+      "severity": "info",
+      "title": "Inferred 资源占比",
+      "detail": "Inferred 占已披露资源总量约 40%，建议关注后续升级钻探。",
+      "citation_refs": [
+        6
+      ],
+      "source": "rule"
+    },
+    {
+      "severity": "info",
+      "title": "部分数据为离线演示快照",
+      "detail": "本次运行有数据通道回落到仓库内置快照（合成演示数据），非实时行情/真实语料。",
+      "citation_refs": [],
+      "source": "rule"
+    }
+  ],
+  "citations": [
+    {
+      "index": 1,
+      "label": "Pilbara lithium shipments rise as spodumene concentrate prices stabilise",
+      "url": "https://demo.example/news/pilbara-shipments-rise",
+      "kind": "news"
+    },
+    {
+      "index": 2,
+      "label": "Pilgangoora expansion study advances to feasibility stage",
+      "url": "https://demo.example/news/pilgangoora-expansion-feasibility",
+      "kind": "news"
+    },
+    {
+      "index": 3,
+      "label": "Lithium carbonate spot prices hold near two-month highs",
+      "url": "https://demo.example/news/lithium-carbonate-spot",
+      "kind": "news"
+    },
+    {
+      "index": 4,
+      "label": "Pilbara producers weigh downstream conversion options amid cost pressure",
+      "url": "https://demo.example/news/pilbara-downstream-options",
+      "kind": "news"
+    },
+    {
+      "index": 5,
+      "label": "Australian lithium exports forecast lifted on stronger Asian demand",
+      "url": "https://demo.example/news/lithium-export-forecast",
+      "kind": "news"
+    },
+    {
+      "index": 6,
+      "label": "NI 43-101 报告：Pilbara Lithium Project (Demo)（data/samples/pilbara_li2o_ni43101_sample.pdf）",
+      "url": null,
+      "kind": "report"
+    },
+    {
+      "index": 7,
+      "label": "价格数据（snapshot 通道）",
+      "url": null,
+      "kind": "dataset"
+    }
+  ],
+  "data_modes": {
+    "news": "snapshot",
+    "resources": "local",
+    "prices": "snapshot"
+  },
+  "warnings": [
+    "offline demo corpus (22 items); synthetic titles, see docs/data-sources.md",
+    "offline synthetic demo series (not real market data); see docs/data-sources.md"
+  ]
+}

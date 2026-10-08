@@ -50,10 +50,7 @@ def summarize(points: Sequence[PricePoint]) -> TrendSummary:
         raise ValueError("summarize() needs at least one point")
     first, last = ordered[0], ordered[-1]
     change_abs = last.price - first.price
-    if first.price == 0:
-        change_pct = 0.0
-    else:
-        change_pct = change_abs / first.price * 100.0
+    change_pct = 0.0 if first.price == 0 else change_abs / first.price * 100.0
     if change_pct > FLAT_THRESHOLD_PCT:
         direction: Direction = "up"
     elif change_pct < -FLAT_THRESHOLD_PCT:

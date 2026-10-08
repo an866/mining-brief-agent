@@ -22,8 +22,8 @@ from pydantic import BaseModel, Field
 from mining_brief_core import paths
 from mining_brief_core.errors import DataNotFoundError, ProviderError
 
-from .base import ProviderOutcome
 from ..models import Article, ArticleDetail, utcnow
+from .base import ProviderOutcome
 
 _TOKEN_SPLIT = re.compile(r"[^\w一-鿿]+", re.UNICODE)
 

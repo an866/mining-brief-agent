@@ -16,7 +16,9 @@ def samples(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     return build_all(tmp_path_factory.mktemp("samples"))
 
 
-def _by_category(estimates: list[ResourceEstimate], category: str, commodity: str) -> ResourceEstimate:
+def _by_category(
+    estimates: list[ResourceEstimate], category: str, commodity: str
+) -> ResourceEstimate:
     for estimate in estimates:
         if estimate.category == category and estimate.commodity == commodity:
             return estimate

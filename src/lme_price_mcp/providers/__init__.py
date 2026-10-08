@@ -14,16 +14,16 @@
 from __future__ import annotations
 
 import os
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 from mining_brief_core.errors import ProviderError
 
-from .base import ProviderOutcome
-from .live import LivePriceProvider
-from .snapshot import SnapshotPriceProvider
 from ..analytics import sparkline, summarize
 from ..commodities import CommoditySpec
 from ..models import PricePoint, PriceQuote, TrendSeries
+from .base import ProviderOutcome
+from .live import LivePriceProvider
+from .snapshot import SnapshotPriceProvider
 
 MODE_ENV_VAR = "MINING_PRICE_SOURCE"
 VALID_MODES = ("auto", "live", "snapshot")
@@ -44,7 +44,7 @@ def get_mode() -> str:
 
 
 def _utcnow() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class PriceService:

@@ -1,0 +1,78 @@
+{
+  "schema": "mining-brief-agent/projects@1",
+  "note": "Demo project catalog. `resources[].uri` points at synthetic NI 43-101 style PDFs bundled in this repository (see docs/data-sources.md); aliases drive natural-language resolution of user queries.",
+  "default_project": "pilbara-lithium",
+  "projects": [
+    {
+      "key": "pilbara-lithium",
+      "name_en": "Pilbara Lithium Project (Demo)",
+      "name_zh": "Pilbara 锂矿（演示）",
+      "aliases": [
+        "pilbara",
+        "pilgangoora",
+        "pilbara lithium",
+        "pilbara minerals",
+        "皮尔巴拉",
+        "锂矿"
+      ],
+      "commodities": ["lithium_carbonate"],
+      "news_query": "Pilbara Pilgangoora lithium",
+      "resources": [
+        {
+          "label": "NI 43-101 Mineral Resource Statement (demo sample)",
+          "uri": "data/samples/pilbara_li2o_ni43101_sample.pdf"
+        }
+      ],
+      "risk_keywords": [
+        "halt",
+        "outage",
+        "disruption",
+        "delay",
+        "lawsuit",
+        "court",
+        "strike",
+        "suspension",
+        "review",
+        "investigation",
+        "downgrade",
+        "trim",
+        "cut",
+        "停产",
+        "诉讼",
+        "下调",
+        "事故",
+        "环保"
+      ]
+    },
+    {
+      "key": "andes-copper-gold",
+      "name_en": "Andes Copper-Gold Project (Demo)",
+      "name_zh": "安第斯铜金矿（演示）",
+      "aliases": ["andes", "andes copper", "安第斯", "铜金"],
+      "commodities": ["copper"],
+      "news_query": "Andes copper gold drilling",
+      "resources": [
+        {
+          "label": "NI 43-101 Mineral Resource Statement (demo sample)",
+          "uri": "data/samples/andes_cu_au_ni43101_sample.pdf"
+        }
+      ],
+      "risk_keywords": [
+        "halt",
+        "outage",
+        "disruption",
+        "delay",
+        "lawsuit",
+        "court",
+        "challenge",
+        "strike",
+        "suspension",
+        "review",
+        "investigation",
+        "停产",
+        "诉讼",
+        "下调"
+      ]
+    }
+  ]
+}

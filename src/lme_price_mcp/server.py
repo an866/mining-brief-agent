@@ -53,9 +53,7 @@ def build_server() -> MCPServer:
             try:
                 parsed = date_type.fromisoformat(str(date).strip())
             except ValueError as exc:
-                raise ToolError(
-                    f"invalid date {date!r}: expected ISO format YYYY-MM-DD"
-                ) from exc
+                raise ToolError(f"invalid date {date!r}: expected ISO format YYYY-MM-DD") from exc
 
         try:
             return get_price_service().quote(spec, parsed)

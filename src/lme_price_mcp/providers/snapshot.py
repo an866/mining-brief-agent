@@ -21,9 +21,9 @@ from pydantic import BaseModel, Field
 from mining_brief_core import paths
 from mining_brief_core.errors import DataNotFoundError, ProviderError
 
-from .base import ProviderOutcome
 from ..commodities import CommoditySpec
 from ..models import PricePoint
+from .base import ProviderOutcome
 
 
 class SnapshotPoint(BaseModel):
@@ -88,7 +88,9 @@ class SnapshotPriceProvider:
             f"(available {earliest.isoformat()}..{latest.isoformat()})"
         )
 
-    def get_series(self, spec: CommoditySpec, days: int) -> tuple[list[PricePoint], ProviderOutcome]:
+    def get_series(
+        self, spec: CommoditySpec, days: int
+    ) -> tuple[list[PricePoint], ProviderOutcome]:
         snapshot = self._load(spec)
         cutoff = date.today() - timedelta(days=days)
         points = [p for p in self._as_points(spec, snapshot) if p.date >= cutoff]

@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import calendar
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from urllib.parse import quote_plus
 
 import feedparser
@@ -18,13 +18,11 @@ import feedparser
 from mining_brief_core.errors import FetchError, ProviderError
 from mining_brief_core.http import fetch_text
 
-from .base import ProviderOutcome
 from ..extract import extract_article
 from ..models import Article, ArticleDetail, utcnow
+from .base import ProviderOutcome
 
-GOOGLE_NEWS_RSS_TEMPLATE = (
-    "https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en"
-)
+GOOGLE_NEWS_RSS_TEMPLATE = "https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en"
 MINING_COM_FEED = "https://www.mining.com/feed/"
 
 _TAG_RE = re.compile(r"<[^>]+>")
@@ -41,7 +39,7 @@ def _struct_time_to_utc(value: object) -> datetime | None:
     if not isinstance(value, tuple) or len(value) < 6:
         return None
     try:
-        return datetime.fromtimestamp(calendar.timegm(value), tz=timezone.utc)
+        return datetime.fromtimestamp(calendar.timegm(value), tz=UTC)
     except (OverflowError, OSError, TypeError, ValueError):
         return None
 

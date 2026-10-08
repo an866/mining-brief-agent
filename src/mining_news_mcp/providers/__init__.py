@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import os
 
+from ..models import Article, ArticleDetail
 from .base import NewsProvider, ProviderOutcome
 from .live import LiveNewsProvider
 from .snapshot import SnapshotProvider
@@ -23,11 +24,11 @@ MODE_ENV_VAR = "MINING_NEWS_SOURCE"
 VALID_MODES = ("auto", "live", "snapshot")
 
 __all__ = [
-    "AutoNewsProvider",
     "MODE_ENV_VAR",
+    "VALID_MODES",
+    "AutoNewsProvider",
     "NewsProvider",
     "ProviderOutcome",
-    "VALID_MODES",
     "get_news_provider",
     "get_source_mode",
 ]
@@ -45,7 +46,7 @@ class AutoNewsProvider:
         self._live = LiveNewsProvider()
         self._snapshot = SnapshotProvider()
 
-    def search(self, query: str, days: int, limit: int) -> tuple[list, ProviderOutcome]:
+    def search(self, query: str, days: int, limit: int) -> tuple[list[Article], ProviderOutcome]:
         mode = get_source_mode()
         if mode == "live":
             return self._live.search(query, days, limit)
@@ -54,7 +55,7 @@ class AutoNewsProvider:
 
         try:
             return self._live.search(query, days, limit)
-        except Exception as exc:  # noqa: BLE001 - any live failure degrades to snapshot
+        except Exception as exc:
             items, outcome = self._snapshot.search(query, days, limit)
             outcome.notes.insert(
                 0,
@@ -62,7 +63,7 @@ class AutoNewsProvider:
             )
             return items, outcome
 
-    def fetch_article(self, url: str) -> tuple:
+    def fetch_article(self, url: str) -> tuple[ArticleDetail, ProviderOutcome]:
         mode = get_source_mode()
         if mode == "snapshot" or url.startswith(SnapshotProvider.DEMO_URL_PREFIX):
             return self._snapshot.fetch_article(url)
@@ -71,7 +72,7 @@ class AutoNewsProvider:
 
         try:
             return self._live.fetch_article(url)
-        except Exception as exc:  # noqa: BLE001 - degrade to snapshot when it has the URL
+        except Exception as exc:
             detail, outcome = self._snapshot.fetch_article(url)
             outcome.notes.insert(
                 0,

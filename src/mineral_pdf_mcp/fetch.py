@@ -59,11 +59,17 @@ def resolve_pdf_source(uri: str) -> tuple[Path, bool]:
         return cache_path, True
 
     if parsed.scheme == "file":
-        path = Path(unquote(parsed.path.lstrip("/"))) if os.name == "nt" else Path(unquote(parsed.path))
+        path = (
+            Path(unquote(parsed.path.lstrip("/")))
+            if os.name == "nt"
+            else Path(unquote(parsed.path))
+        )
         return _validate_local(path, uri)
 
     if parsed.scheme and len(parsed.scheme) > 1:
-        raise FetchError(f"unsupported URI scheme {parsed.scheme!r} (use http(s), file://, or a path)")
+        raise FetchError(
+            f"unsupported URI scheme {parsed.scheme!r} (use http(s), file://, or a path)"
+        )
 
     # Bare path: absolute, or relative to the project root (so data/samples/... works
     # regardless of the process working directory).

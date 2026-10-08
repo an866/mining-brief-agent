@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from mining_news_mcp.providers.live import parse_feed
 
 FIXTURES = Path(__file__).resolve().parents[1] / "fixtures"
 
-FALLBACK_NOW = datetime(2025, 10, 3, 12, 0, tzinfo=timezone.utc)
+FALLBACK_NOW = datetime(2025, 10, 3, 12, 0, tzinfo=UTC)
 
 
 def _articles():
@@ -29,8 +29,8 @@ def test_parses_all_entries() -> None:
 
 def test_parses_pub_date_as_utc() -> None:
     articles = _articles()
-    assert articles[0].published_at == datetime(2025, 10, 1, 8, 30, tzinfo=timezone.utc)
-    assert articles[2].published_at == datetime(2025, 10, 2, 14, 5, tzinfo=timezone.utc)
+    assert articles[0].published_at == datetime(2025, 10, 1, 8, 30, tzinfo=UTC)
+    assert articles[2].published_at == datetime(2025, 10, 2, 14, 5, tzinfo=UTC)
 
 
 def test_missing_date_falls_back_to_reference_now() -> None:

@@ -18,9 +18,9 @@ from datetime import date
 from mining_brief_core.errors import FetchError, ProviderError
 from mining_brief_core.http import fetch_text
 
-from .base import ProviderOutcome
 from ..commodities import CommoditySpec
 from ..models import PricePoint
+from .base import ProviderOutcome
 
 QUOTE_URL_TEMPLATE = "https://hq.sinajs.cn/list={symbols}"
 SINA_HEADERS = {"Referer": "https://finance.sina.com.cn"}
@@ -79,7 +79,9 @@ class LivePriceProvider:
         point = PricePoint(commodity=spec.key, date=date.today(), price=price, unit=spec.unit)
         return point, ProviderOutcome(mode="live", notes=[f"sina symbol {spec.live_symbol}"])
 
-    def get_series(self, spec: CommoditySpec, days: int) -> tuple[list[PricePoint], ProviderOutcome]:
+    def get_series(
+        self, spec: CommoditySpec, days: int
+    ) -> tuple[list[PricePoint], ProviderOutcome]:
         raise ProviderError(
             "the live quote endpoint provides no history; trend comes from the snapshot channel"
         )

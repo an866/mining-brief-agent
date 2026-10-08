@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -76,7 +76,7 @@ def test_search_respects_limit(provider: SnapshotProvider) -> None:
 
 def test_search_rebases_dates_onto_now(provider: SnapshotProvider) -> None:
     items, _ = provider.search("pilbara", days=7, limit=10)
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     assert abs(now - items[0].published_at - timedelta(days=1)) < timedelta(minutes=5)
 
 
@@ -105,5 +105,5 @@ def test_bundled_corpus_matches_pilbara_query() -> None:
     assert len(items) >= 3
     # days_ago == 7 items sit exactly on the window edge; allow a minute of
     # clock skew between the provider's "now" and the test's.
-    cutoff = datetime.now(timezone.utc) - timedelta(days=7, minutes=1)
+    cutoff = datetime.now(UTC) - timedelta(days=7, minutes=1)
     assert all(item.published_at >= cutoff for item in items)
