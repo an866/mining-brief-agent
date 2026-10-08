@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Demo Mining Wire</title>
+    <link>https://demo.example/</link>
+    <description>Synthetic feed fixture for tests</description>
+    <item>
+      <title>Pilbara shipments rise on firmer concentrate prices</title>
+      <link>https://demo.example/news/a</link>
+      <guid>https://demo.example/news/a</guid>
+      <pubDate>Wed, 01 Oct 2025 08:30:00 GMT</pubDate>
+      <description><![CDATA[<p>Shipments <b>rose</b> in September across the region.</p>]]></description>
+    </item>
+    <item>
+      <title>Lithium carbonate holds near two-month highs</title>
+      <link>https://demo.example/news/b</link>
+      <guid>https://demo.example/news/b</guid>
+      <description>Assessments were little changed week-on-week.</description>
+    </item>
+    <item>
+      <title>Copper smelter margins recover</title>
+      <link>https://demo.example/news/c</link>
+      <guid>https://demo.example/news/c</guid>
+      <pubDate>Thu, 02 Oct 2025 14:05:00 GMT</pubDate>
+      <source url="https://bureau.example/">Demo Bureau</source>
+      <description>Treatment charges ticked up.</description>
+    </item>
+  </channel>
+</rss>

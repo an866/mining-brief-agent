@@ -1,0 +1,204 @@
+{
+  "schema": "mining-brief-agent/news-snapshot@1",
+  "note": "DEMO CORPUS. Every title below is synthetic and must not be attributed to any real outlet or company; this file exists so the news -> agent -> brief pipeline runs deterministically offline. `published_days_ago` is rebased onto the current date at load time. Live mode (MINING_NEWS_SOURCE=live) fetches real feeds instead.",
+  "items": [
+    {
+      "id": "n-0001",
+      "title": "Pilbara lithium shipments rise as spodumene concentrate prices stabilise",
+      "url": "https://demo.example/news/pilbara-shipments-rise",
+      "source": "demo-wire",
+      "published_days_ago": 0,
+      "summary": "Concentrate exports from Western Australian operations increased month-on-month, with buyers reporting firmer settlement levels for Q4 cargoes.",
+      "body": "Concentrate shipments from Pilbara lithium operations rose this month as spodumene prices stabilised across the region, according to port data compiled by demo-wire. Volumes recovered after a maintenance window at one of the region's export terminals finished ahead of schedule.\n\nTraders said Q4 settlements for 6% spodumene concentrate have converged in a narrower band than earlier in the year, easing the margin uncertainty that dominated negotiations through the middle of the year. Several producers have kept output guidance unchanged.\n\nAnalysts caution that downstream conversion margins in China remain compressed, and that the pace of demand recovery from cathode makers will decide whether the price floor holds into next quarter. The report is demo content for the mining-brief-agent sample pipeline."
+    },
+    {
+      "id": "n-0002",
+      "title": "Pilgangoora expansion study advances to feasibility stage",
+      "url": "https://demo.example/news/pilgangoora-expansion-feasibility",
+      "source": "demo-wire",
+      "published_days_ago": 1,
+      "summary": "A pre-feasibility study for a brownfield expansion at the Pilgangoora lithium project has been upgraded, with a definitive feasibility study targeted for completion next year.",
+      "body": "The expansion concept for the Pilgangoora lithium operation has moved into the definitive feasibility stage, according to a demo project update. The study contemplates additional crushing and dense-media separation capacity alongside a debottlenecking of the existing concentrator.\n\nA decision on the final scope is expected after metallurgical test work completes. The update said grid power and existing camp infrastructure are expected to be the main cost advantages relative to greenfield alternatives in the district.\n\nThis article is synthetic demo content bundled with mining-brief-agent; it does not describe events at any real project."
+    },
+    {
+      "id": "n-0003",
+      "title": "WA government flags faster approvals for critical minerals projects",
+      "url": "https://demo.example/news/wa-faster-approvals",
+      "source": "demo-policy-wire",
+      "published_days_ago": 1,
+      "summary": "A streamlined assessment pathway for critical minerals projects is under consultation, with industry groups broadly supportive.",
+      "body": null
+    },
+    {
+      "id": "n-0004",
+      "title": "Lithium carbonate spot prices hold near two-month highs",
+      "url": "https://demo.example/news/lithium-carbonate-spot",
+      "source": "demo-wire",
+      "published_days_ago": 2,
+      "summary": "Battery-grade lithium carbonate assessments were little changed week-on-week, holding near their best levels since summer.",
+      "body": "Battery-grade lithium carbonate spot assessments held near two-month highs this week, with trade described as thin but balanced. Buyers covered near-term requirements while sellers showed little urgency at current levels.\n\nConversion economics from spodumene feedstock have improved modestly as concentrate settlements stabilised, though integrated producers still report thin margins outside of long-term contracts. Inventory at cathode plants remains the key swing factor cited by traders.\n\nDemo content: figures and commentary here are illustrative and do not represent any real market assessment."
+    },
+    {
+      "id": "n-0005",
+      "title": "Pilbara producers weigh downstream conversion options amid cost pressure",
+      "url": "https://demo.example/news/pilbara-downstream-options",
+      "source": "demo-wire",
+      "published_days_ago": 2,
+      "summary": "Operators are evaluating domestic and overseas conversion routes as energy costs and permitting timelines shape the calculus.",
+      "body": null
+    },
+    {
+      "id": "n-0006",
+      "title": "Australian lithium exports forecast lifted on stronger Asian demand",
+      "url": "https://demo.example/news/lithium-export-forecast",
+      "source": "demo-policy-wire",
+      "published_days_ago": 3,
+      "summary": "The quarterly resources outlook nudged export volumes higher, citing resilient cathode production schedules in Asia.",
+      "body": null
+    },
+    {
+      "id": "n-0007",
+      "title": "Rail outage disrupts bulk concentrate haulage in the Pilbara",
+      "url": "https://demo.example/news/rail-outage-pilbara",
+      "source": "demo-wire",
+      "published_days_ago": 4,
+      "summary": "A signalling fault halted haulage for roughly 36 hours; operators drew down port stockpiles to keep shipment schedules.",
+      "body": null
+    },
+    {
+      "id": "n-0008",
+      "title": "Spodumene contract negotiations for Q4 reported near settlement",
+      "url": "https://demo.example/news/spodumene-q4-negotiations",
+      "source": "demo-wire",
+      "published_days_ago": 5,
+      "summary": "Most major sellers and buyers have converged on pricing formulas tied to published concentrate indices, with fewer volume-linked rebates.",
+      "body": null
+    },
+    {
+      "id": "n-0009",
+      "title": "Environmental review opens for proposed lithium processing hub",
+      "url": "https://demo.example/news/environmental-review-hub",
+      "source": "demo-policy-wire",
+      "published_days_ago": 6,
+      "summary": "The public comment window for a proposed conversion facility runs for six weeks, with water allocation the most contested issue.",
+      "body": null
+    },
+    {
+      "id": "n-0010",
+      "title": "Pilbara community consultation extended for mine expansion",
+      "url": "https://demo.example/news/community-consultation-extended",
+      "source": "demo-policy-wire",
+      "published_days_ago": 7,
+      "summary": "The consultation period was extended by three weeks following requests from local stakeholders.",
+      "body": null
+    },
+    {
+      "id": "n-0011",
+      "title": "Copper holds gains as smelter margins recover",
+      "url": "https://demo.example/news/copper-smelter-margins",
+      "source": "demo-wire",
+      "published_days_ago": 3,
+      "summary": "Three-month copper held above recent support as treatment charges ticked up, improving spot smelting economics.",
+      "body": null
+    },
+    {
+      "id": "n-0012",
+      "title": "Global copper concentrate TC/RCs remain under pressure",
+      "url": "https://demo.example/news/copper-tcrc-pressure",
+      "source": "demo-wire",
+      "published_days_ago": 5,
+      "summary": "Mine disruptions and smelter capacity growth kept concentrate treatment charges near multi-year lows.",
+      "body": null
+    },
+    {
+      "id": "n-0013",
+      "title": "Andes copper-gold project drilling intersects wide mineralisation",
+      "url": "https://demo.example/news/andes-drilling-intersects",
+      "source": "demo-wire",
+      "published_days_ago": 2,
+      "summary": "Step-out holes returned broad intervals above cut-off; assays for the remaining holes are pending.",
+      "body": null
+    },
+    {
+      "id": "n-0014",
+      "title": "Andes project permit timeline unchanged despite court challenge",
+      "url": "https://demo.example/news/andes-court-challenge",
+      "source": "demo-policy-wire",
+      "published_days_ago": 6,
+      "summary": "An administrative appeal seeking review of the water permit was filed; the company said the timeline is unchanged pending the court's scheduling decision.",
+      "body": null
+    },
+    {
+      "id": "n-0015",
+      "title": "锂精矿现货价格企稳，澳矿发货量环比回升",
+      "url": "https://demo.example/news/lithium-concentrate-cn",
+      "source": "demo-wire-zh",
+      "published_days_ago": 1,
+      "summary": "现货市场成交清淡但价格重心不再下移，澳洲主要港口发运量环比小幅增加。",
+      "body": null
+    },
+    {
+      "id": "n-0016",
+      "title": "非洲锂矿供应增量放缓，市场关注库存去化节奏",
+      "url": "https://demo.example/news/africa-lithium-supply",
+      "source": "demo-wire-zh",
+      "published_days_ago": 4,
+      "summary": "部分矿山下调年度发运指引，冶炼端原料库存天数环比回落。",
+      "body": null
+    },
+    {
+      "id": "n-0017",
+      "title": "Iron ore steady as steel output trims offset port restocking",
+      "url": "https://demo.example/news/iron-ore-steady",
+      "source": "demo-wire",
+      "published_days_ago": 3,
+      "summary": "Benchmark iron ore was little changed, with mill margins and port inventories roughly balanced.",
+      "body": null
+    },
+    {
+      "id": "n-0018",
+      "title": "Zinc market tightens on mine supply misses",
+      "url": "https://demo.example/news/zinc-supply-misses",
+      "source": "demo-wire",
+      "published_days_ago": 5,
+      "summary": "Several mid-tier zinc operations trimmed guidance, keeping concentrate tight and treatment charges elevated.",
+      "body": null
+    },
+    {
+      "id": "n-0019",
+      "title": "Nickel surplus narrows as Indonesian laterite grades decline",
+      "url": "https://demo.example/news/nickel-surplus-narrows",
+      "source": "demo-wire",
+      "published_days_ago": 7,
+      "summary": "Higher-cost marginal supply is being pushed out as ore grades soften, according to trade estimates.",
+      "body": null
+    },
+    {
+      "id": "n-0020",
+      "title": "Mining sector M&A activity picks up across battery metals",
+      "url": "https://demo.example/news/mining-ma-pickup",
+      "source": "demo-wire",
+      "published_days_ago": 8,
+      "summary": "Strategic buyers returned to the market, focused on late-stage lithium and copper assets with existing infrastructure.",
+      "body": null
+    },
+    {
+      "id": "n-0021",
+      "title": "Pilbara quarterly output guidance maintained despite weather delays",
+      "url": "https://demo.example/news/pilbara-guidance-maintained",
+      "source": "demo-wire",
+      "published_days_ago": 9,
+      "summary": "Wet-season interruptions trimmed a week of planned tonnes, but full-year guidance was left unchanged.",
+      "body": null
+    },
+    {
+      "id": "n-0022",
+      "title": "Analysts trim lithium price forecasts for next year on supply outlook",
+      "url": "https://demo.example/news/lithium-forecast-trim",
+      "source": "demo-wire",
+      "published_days_ago": 10,
+      "summary": "A survey of forecasters lowered the median lithium carbonate deck for next year, citing slower-than-expected restocking.",
+      "body": null
+    }
+  ]
+}
