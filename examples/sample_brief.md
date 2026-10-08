@@ -1,12 +1,12 @@
 # 矿权日报 · Pilbara 锂矿（演示）
 
-> 生成时间：2026-10-08 19:42（北京时间） ｜ 检索窗口：近7天 ｜ 数据通道：新闻=离线快照（演示数据） ｜ 储量=本地文档 ｜ 价格=离线快照（演示数据）
+> 生成时间：2026-10-08 19:48（北京时间） ｜ 检索窗口：近7天 ｜ 数据通道：新闻=离线快照（演示数据） ｜ 储量=本地文档 ｜ 价格=离线快照（演示数据）
 > 项目识别：匹配别名“pilbara”；商品：lithium_carbonate
 
 ## 摘要
 
 - 近7天内检索到 5 条相关新闻，最新一条为《Pilbara lithium shipments rise as spodumene concentrate prices stabilise》（demo-wire，2026-10-08）
-- NI 43-101 资源量：Indicated 52.4 Mt @ 1.12 % Li2O（含 587 kt）；Inferred 34.8 Mt @ 0.94 % Li2O（含 327 kt）
+- NI 43-101 资源量：Indicated 52.4 Mt @ 1.12 % Li2O（含 587 kt Li2O）；Inferred 34.8 Mt @ 0.94 % Li2O（含 327 kt Li2O）
 - Lithium carbonate (GFEX main contract)最新价 62,735.0 CNY/t，近30日 -23.25%（下行）
 - 部分数据来自离线演示快照（非实时），详见页脚数据通道说明
 
@@ -14,13 +14,13 @@
 
 1. **Pilbara lithium shipments rise as spodumene concentrate prices stabilise** — demo-wire · 2026-10-08 [1]
    - Concentrate exports from Western Australian operations increased month-on-month, with buyers reporting firmer settlement
-1. **Pilgangoora expansion study advances to feasibility stage** — demo-wire · 2026-10-07 [2]
+2. **Pilgangoora expansion study advances to feasibility stage** — demo-wire · 2026-10-07 [2]
    - A pre-feasibility study for a brownfield expansion at the Pilgangoora lithium project has been upgraded, with a definiti
-1. **Lithium carbonate spot prices hold near two-month highs** — demo-wire · 2026-10-06 [3]
+3. **Lithium carbonate spot prices hold near two-month highs** — demo-wire · 2026-10-06 [3]
    - Battery-grade lithium carbonate assessments were little changed week-on-week, holding near their best levels since summe
-1. **Pilbara producers weigh downstream conversion options amid cost pressure** — demo-wire · 2026-10-06 [4]
+4. **Pilbara producers weigh downstream conversion options amid cost pressure** — demo-wire · 2026-10-06 [4]
    - Operators are evaluating domestic and overseas conversion routes as energy costs and permitting timelines shape the calc
-1. **Australian lithium exports forecast lifted on stronger Asian demand** — demo-policy-wire · 2026-10-05 [5]
+5. **Australian lithium exports forecast lifted on stronger Asian demand** — demo-policy-wire · 2026-10-05 [5]
    - The quarterly resources outlook nudged export volumes higher, citing resilient cathode production schedules in Asia.
 
 ### 全文参考
