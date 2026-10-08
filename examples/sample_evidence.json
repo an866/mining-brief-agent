@@ -84,7 +84,7 @@
   ],
   "resources": {
     "source": "data/samples/pilbara_li2o_ni43101_sample.pdf",
-    "resolved_path": "D:\\ClaudeAI\\test\\mining-brief-agent\\data\\samples\\pilbara_li2o_ni43101_sample.pdf",
+    "resolved_path": "data/samples/pilbara_li2o_ni43101_sample.pdf",
     "sha256": "3a70385dfadbaa0596ec35d349279d30ea1cf6b80b7160bce13e4f2644f1f26d",
     "page_count": 2,
     "report_title": "NI 43-101 Technical Report on the Pilbara Lithium Project",

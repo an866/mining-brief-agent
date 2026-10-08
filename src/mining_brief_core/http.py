@@ -12,7 +12,7 @@ import httpx
 
 from .errors import FetchError
 
-USER_AGENT = "mining-brief-agent/0.1 (+https://github.com/mining-brief-agent/mining-brief-agent)"
+USER_AGENT = "mining-brief-agent/0.1 (+https://github.com/an866/mining-brief-agent)"
 DEFAULT_TIMEOUT_S = 15.0
 DEFAULT_MAX_BYTES = 5 * 1024 * 1024  # 5 MiB
 PDF_MAX_BYTES = 64 * 1024 * 1024  # 64 MiB

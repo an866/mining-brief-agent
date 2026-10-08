@@ -1,5 +1,11 @@
 # mining-brief-agent · 矿权日报 Agent（MCP 架构）
 
+[![CI](https://github.com/an866/mining-brief-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/an866/mining-brief-agent/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)
+
+> 📄 不想跑代码？直接看离线演示的成品报告：[`examples/sample_brief.md`](examples/sample_brief.md)（配套证据包 [`examples/sample_evidence.json`](examples/sample_evidence.json)）
+
 基于 [MCP (Model Context Protocol)](https://modelcontextprotocol.io) 的「矿权日报」智能体：**3 个 MCP server + 1 个 Agent 编排客户端**，输入一句自然语言（如 *"给我生成一份关于 Pilbara 锂矿的今日简报"*），输出一份 Markdown 简报：新闻摘要 + NI 43-101 储量数据 + 价格走势 + 风险提示，且每个结论都带引用源链接。
 
 ```text
